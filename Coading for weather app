@@ -31,4 +31,104 @@ public:
     {
         cout << "Location: " << location << endl;
         cout << "Date: " << date << endl;
-        cout << "Weather Condition: " …
+        cout << "Weather Condition: " << weatherCondition << endl;
+        cout << "Temperature: " << temperature << "°C" << endl;
+        cout << "Humidity: " << humidity << "%" << endl;
+        cout << "Rain Possibility: " << rainPossibility << "%" << endl;
+        cout << endl;
+    }
+};
+
+// Function to display weekly weather report
+void displayWeeklyReport(const vector<Weather>& weeklyWeather)
+{
+    cout << "Weekly Weather Report:" << endl;
+    for (const auto& weather : weeklyWeather) {
+        weather.displayWeather();
+    }
+}
+
+// Function to display monthly weather report
+void displayMonthlyWeather(const vector<vector<Weather>>& monthlyWeather)
+{
+    cout << "Monthly Weather Report:" << endl;
+    for (const auto& week : monthlyWeather) {
+        displayWeeklyReport(week);
+    }
+}
+
+// Function to get weather details from the user
+Weather getWeatherFromUser()
+{
+    string location, date, weatherCondition;
+    float temperature, humidity, rainPossibility;
+
+    cout << "Enter Location: ";
+    getline(cin, location);
+
+    cout << "Enter Date: ";
+    getline(cin, date);
+
+    cout << "Enter Weather Condition: ";
+    getline(cin, weatherCondition);
+
+    cout << "Enter Temperature (in °C): ";
+    cin >> temperature;
+
+    cout << "Enter Humidity (in %): ";
+    cin >> humidity;
+
+    cout << "Enter Rain Possibility (in %): ";
+    cin >> rainPossibility;
+
+    cin.ignore(); // Ignore the trailing newline character
+
+    Weather weather(location, date, weatherCondition, temperature, humidity, rainPossibility);
+    cout << endl;
+
+    return weather;
+}
+
+int main()
+{
+    // Get weather details for today, yesterday, and tomorrow
+    cout << "Today's Weather:" << endl;
+    Weather today = getWeatherFromUser();
+
+    cout << "Yesterday's Weather:" << endl;
+    Weather yesterday = getWeatherFromUser();
+
+    cout << "Tomorrow's Weather:" << endl;
+    Weather tomorrow = getWeatherFromUser();
+
+    // Display weather details for today, yesterday, and tomorrow
+    cout << "Today's Weather Details:" << endl;
+    today.displayWeather();
+
+    cout << "Yesterday's Weather Details:" << endl;
+    yesterday.displayWeather();
+
+    cout << "Tomorrow's Weather Details:" << endl;
+    tomorrow.displayWeather();
+
+    // Create a weekly weather report
+    vector<Weather> weeklyWeather;
+    weeklyWeather.push_back(yesterday);
+    weeklyWeather.push_back(today);
+    weeklyWeather.push_back(tomorrow);
+
+    // Display the weekly weather report
+    displayWeeklyReport(weeklyWeather);
+
+    // Create a monthly weather report
+    vector<vector<Weather>> monthlyWeather;
+    monthlyWeather.push_back(weeklyWeather);
+    monthlyWeather.push_back(weeklyWeather);
+    monthlyWeather.push_back(weeklyWeather);
+
+    // Display the monthly weather report
+    displayMonthlyWeather(monthlyWeather);
+
+    return 0;
+}
+ 
