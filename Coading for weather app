@@ -1,0 +1,34 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+// Weather class definition
+class Weather {
+private:
+    string location;
+    string date;
+    string weatherCondition;
+    float temperature;
+    float humidity;
+    float rainPossibility;
+
+public:
+    // Constructor
+    Weather(string loc, string dt, string condition, float temp, float hum, float rain)
+    {
+        location = loc;
+        date = dt;
+        weatherCondition = condition;
+        temperature = temp;
+        humidity = hum;
+        rainPossibility = rain;
+    }
+
+    // Function to display weather details
+    void displayWeather()
+    {
+        cout << "Location: " << location << endl;
+        cout << "Date: " << date << endl;
+        cout << "Weather Condition: " …
